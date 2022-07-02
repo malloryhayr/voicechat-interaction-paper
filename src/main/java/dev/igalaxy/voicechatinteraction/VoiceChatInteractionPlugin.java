@@ -67,7 +67,6 @@ public class VoiceChatInteractionPlugin implements VoicechatPlugin {
             }
         }
 
-        System.out.println(senderConnection.getPlayer().getPlayer());
         ServerPlayer player = senderConnection.getPlayer();
         if (!(senderConnection.getPlayer().getPlayer() instanceof Player bukkitPlayer)) {
             VoiceChatInteraction.LOGGER.warn("Received microphone packet from non-player");
@@ -89,13 +88,11 @@ public class VoiceChatInteractionPlugin implements VoicechatPlugin {
         short[] decoded = decoder.decode(event.getPacket().getOpusEncodedData());
 
         if (AudioUtils.calculateAudioLevel(decoded) < VoiceChatInteraction.SERVER_CONFIG.minActivationThreshold) {
-            VoiceChatInteraction.LOGGER.info("BELOW THRESHOLD");
             return;
         }
 
         bukkitPlayer.getServer().getScheduler().runTask(VoiceChatInteraction.INSTANCE, () -> {
             if (activate(player)) {
-                VoiceChatInteraction.LOGGER.info("SENDING EVENT");
                 bukkitPlayer.getWorld().sendGameEvent(bukkitPlayer, GameEvent.STEP, bukkitPlayer.getLocation().toVector());
             }
         });
