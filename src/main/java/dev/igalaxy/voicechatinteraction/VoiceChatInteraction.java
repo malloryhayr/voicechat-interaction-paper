@@ -1,8 +1,12 @@
-package dev.igalaxy.voiechatinteraction;
+package dev.igalaxy.voicechatinteraction;
 
 import de.maxhenkel.voicechat.api.BukkitVoicechatService;
+import dev.igalaxy.voicechatinteraction.config.ServerConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bukkit.GameEvent;
+import org.bukkit.Server;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nullable;
@@ -11,12 +15,31 @@ public final class VoiceChatInteraction extends JavaPlugin {
 
     public static final String PLUGIN_ID = "voicechat_interaction";
     public static final Logger LOGGER = LogManager.getLogger(PLUGIN_ID);
+    public static ServerConfig SERVER_CONFIG;
+    public static Server SERVER;
+    public static GameEvent VOICE_GAME_EVENT;
+    public static VoiceChatInteraction INSTANCE;
 
     @Nullable
     private VoiceChatInteractionPlugin voicechatPlugin;
 
     @Override
     public void onEnable() {
+        SERVER = getServer();
+        VOICE_GAME_EVENT = GameEvent.STEP;
+        INSTANCE = this;
+
+        FileConfiguration config = this.getConfig();
+        config.addDefault("group_interaction", false);
+        config.addDefault("whisper_interaction", false);
+        config.addDefault("sneak_interaction", false);
+        config.addDefault("voice_sculk_frequency", 7);
+        config.addDefault("minimum_activation_threshold", -50);
+        config.options().copyDefaults(true);
+        saveConfig();
+
+        SERVER_CONFIG = new ServerConfig(config);
+
         BukkitVoicechatService service = getServer().getServicesManager().load(BukkitVoicechatService.class);
         if (service != null) {
             voicechatPlugin = new VoiceChatInteractionPlugin();
