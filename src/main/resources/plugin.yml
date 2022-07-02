@@ -1,9 +1,9 @@
-name: example_plugin
+name: voicechat_interaction
 version: ${version}
-main: com.example.voicechatplugin.ExamplePlugin
+main: dev.igalaxy.voicechatinteraction.VoiceChatInteraction
 api-version: ${bukkit_api_version}
-prefix: example_plugin
-authors: [ "Example Author" ]
-description: A Simple Voice Chat API plugin example
-website: https://example.com
+prefix: voicechat_interaction
+authors: [ "iGalaxy" ]
+description: Detect voice chat with the sculk sensor
+website: https://github.com/iGalaxyYT/voicechat-interaction-paper
 depend: [ voicechat ]

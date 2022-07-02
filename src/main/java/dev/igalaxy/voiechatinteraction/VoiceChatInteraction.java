@@ -1,4 +1,4 @@
-package com.example.voicechatplugin;
+package dev.igalaxy.voiechatinteraction;
 
 import de.maxhenkel.voicechat.api.BukkitVoicechatService;
 import org.apache.logging.log4j.LogManager;
@@ -7,23 +7,23 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nullable;
 
-public final class ExamplePlugin extends JavaPlugin {
+public final class VoiceChatInteraction extends JavaPlugin {
 
-    public static final String PLUGIN_ID = "example_plugin";
+    public static final String PLUGIN_ID = "voicechat_interaction";
     public static final Logger LOGGER = LogManager.getLogger(PLUGIN_ID);
 
     @Nullable
-    private ExampleVoicechatPlugin voicechatPlugin;
+    private VoiceChatInteractionPlugin voicechatPlugin;
 
     @Override
     public void onEnable() {
         BukkitVoicechatService service = getServer().getServicesManager().load(BukkitVoicechatService.class);
         if (service != null) {
-            voicechatPlugin = new ExampleVoicechatPlugin();
+            voicechatPlugin = new VoiceChatInteractionPlugin();
             service.registerPlugin(voicechatPlugin);
-            LOGGER.info("Successfully registered example plugin");
+            LOGGER.info("Successfully registered voicechat_interaction plugin");
         } else {
-            LOGGER.info("Failed to register example plugin");
+            LOGGER.info("Failed to register voicechat_interaction plugin");
         }
     }
 
@@ -31,7 +31,7 @@ public final class ExamplePlugin extends JavaPlugin {
     public void onDisable() {
         if (voicechatPlugin != null) {
             getServer().getServicesManager().unregister(voicechatPlugin);
-            LOGGER.info("Successfully unregistered example plugin");
+            LOGGER.info("Successfully unregistered voicechat_interaction plugin");
         }
     }
 }
