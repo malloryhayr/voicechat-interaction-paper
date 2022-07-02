@@ -33,7 +33,6 @@ public final class VoiceChatInteraction extends JavaPlugin {
         config.addDefault("group_interaction", false);
         config.addDefault("whisper_interaction", false);
         config.addDefault("sneak_interaction", false);
-        config.addDefault("voice_sculk_frequency", 7);
         config.addDefault("minimum_activation_threshold", -50);
         config.options().copyDefaults(true);
         saveConfig();
