@@ -75,7 +75,6 @@ public class VoiceChatInteractionPlugin implements VoicechatPlugin {
 
         if (!VoiceChatInteraction.SERVER_CONFIG.sneakInteraction) {
             if (bukkitPlayer.isSneaking()) {
-                VoiceChatInteraction.LOGGER.info("SNEAKING");
                 return;
             }
         }
