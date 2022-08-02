@@ -92,7 +92,7 @@ public class VoiceChatInteractionPlugin implements VoicechatPlugin {
 
         bukkitPlayer.getServer().getScheduler().runTask(VoiceChatInteraction.INSTANCE, () -> {
             if (activate(player)) {
-                bukkitPlayer.getWorld().sendGameEvent(bukkitPlayer, GameEvent.STEP, bukkitPlayer.getLocation().toVector());
+                bukkitPlayer.getWorld().sendGameEvent(null, VoiceChatInteraction.VOICE_GAME_EVENT, bukkitPlayer.getLocation().toVector());
             }
         });
     }

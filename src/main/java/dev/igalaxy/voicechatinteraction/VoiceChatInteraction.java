@@ -26,7 +26,7 @@ public final class VoiceChatInteraction extends JavaPlugin {
     @Override
     public void onEnable() {
         SERVER = getServer();
-        VOICE_GAME_EVENT = GameEvent.STEP;
+        VOICE_GAME_EVENT = GameEvent.PRIME_FUSE;
         INSTANCE = this;
 
         FileConfiguration config = this.getConfig();
