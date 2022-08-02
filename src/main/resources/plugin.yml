@@ -1,5 +1,5 @@
 name: voicechat_interaction
-version: ${plugin_version}
+version: ${version}
 main: dev.igalaxy.voicechatinteraction.VoiceChatInteraction
 api-version: ${bukkit_api_version}
 prefix: voicechat_interaction
