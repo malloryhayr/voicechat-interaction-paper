@@ -6,7 +6,10 @@ import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import de.maxhenkel.voicechat.api.events.VoicechatServerStartedEvent;
 import de.maxhenkel.voicechat.api.opus.OpusDecoder;
 import org.bukkit.GameEvent;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
@@ -105,6 +108,24 @@ public class VoiceChatInteractionPlugin implements VoicechatPlugin {
             return true;
         }
         return false;
+    }
+
+    public boolean getInteractionToggle(Player player) {
+        PersistentDataContainer data = player.getPersistentDataContainer();
+        NamespacedKey key = new NamespacedKey(VoiceChatInteraction.INSTANCE, "interaction_toggle");
+
+        if (!data.has(key)) {
+            return VoiceChatInteraction.SERVER_CONFIG.defaultInteractionToggle;
+        } else {
+            return data.get(key, PersistentDataType.BYTE) != 0;
+        }
+    }
+
+    public void setInteractionToggle(Player player, Boolean value) {
+        PersistentDataContainer data = player.getPersistentDataContainer();
+        NamespacedKey key = new NamespacedKey(VoiceChatInteraction.INSTANCE, "interaction_toggle");
+
+        data.set(key, PersistentDataType.BYTE, (byte) (value ? 1 : 0));
     }
 
 }
