@@ -5,6 +5,7 @@ import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import de.maxhenkel.voicechat.api.events.VoicechatServerStartedEvent;
 import de.maxhenkel.voicechat.api.opus.OpusDecoder;
+import org.bukkit.Bukkit;
 import org.bukkit.GameEvent;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -103,7 +104,7 @@ public class VoiceChatInteractionPlugin implements VoicechatPlugin {
     private boolean activate(ServerPlayer player) {
         Long lastTimestamp = cooldowns.get(player.getUuid());
         long currentTime = VoiceChatInteraction.SERVER.getPlayer(player.getUuid()).getWorld().getGameTime();
-        if (lastTimestamp == null || currentTime - lastTimestamp > 20L) {
+        if ((lastTimestamp == null || currentTime - lastTimestamp > 20L) && getInteractionToggle(Bukkit.getPlayer(player.getUuid()))) {
             cooldowns.put(player.getUuid(), currentTime);
             return true;
         }
