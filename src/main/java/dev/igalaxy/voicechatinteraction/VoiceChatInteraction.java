@@ -21,7 +21,7 @@ public final class VoiceChatInteraction extends JavaPlugin {
     public static VoiceChatInteraction INSTANCE;
 
     @Nullable
-    private VoiceChatInteractionPlugin voicechatPlugin;
+    public static VoiceChatInteractionPlugin voicechatPlugin;
 
     @Override
     public void onEnable() {
@@ -34,6 +34,7 @@ public final class VoiceChatInteraction extends JavaPlugin {
         config.addDefault("whisper_interaction", false);
         config.addDefault("sneak_interaction", false);
         config.addDefault("minimum_activation_threshold", -50);
+        config.addDefault("default_interaction_toggle", true);
         config.options().copyDefaults(true);
         saveConfig();
 
@@ -47,6 +48,8 @@ public final class VoiceChatInteraction extends JavaPlugin {
         } else {
             LOGGER.info("Failed to register voicechat_interaction plugin");
         }
+
+        this.getCommand("voicechat_interaction").setExecutor(new VoiceChatInteractionCommand());
     }
 
     @Override

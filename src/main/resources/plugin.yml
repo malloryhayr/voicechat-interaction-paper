@@ -7,3 +7,9 @@ authors: [ "henkelmax", "iGalaxy" ]
 description: Detect voice chat with the sculk sensor
 website: https://github.com/iGalaxyYT/voicechat-interaction-paper
 depend: [ voicechat ]
+commands:
+  voicechat_interaction:
+    description: "Manage Voice Chat Interaction settings"
+    usage: "/voicechat_interaction toggle [<player>]"
+    aliases: [voicechat_interaction]
+    permission: voicechat_interaction
