@@ -1,0 +1,29 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+      HANGAR_TOKEN: ${{ secrets.HANGAR_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Publish to Modrinth
+        run: ./gradlew modrinth
+      - name: Publish to Hangar
+        run: ./gradlew publishAllPublicationsToHangar
+      - name: Build for GitHub
+        run: ./gradlew build
+      - name: Publish to GitHub
+        uses: xresloader/upload-to-github-release@v1
+        with:
+          file: "*!(dev).jar"
+          update_latest_release: true

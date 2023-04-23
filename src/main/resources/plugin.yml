@@ -1,10 +1,10 @@
 name: voicechat_interaction
-version: ${version}
+version: $version
 main: dev.igalaxy.voicechatinteraction.VoiceChatInteraction
-api-version: ${bukkit_api_version}
+api-version: $apiVersion
 prefix: voicechat_interaction
 authors: [ "henkelmax", "iGalaxy" ]
-description: Detect voice chat with the sculk sensor
+description: $description
 website: https://github.com/iGalaxyYT/voicechat-interaction-paper
 depend: [ voicechat ]
 commands:
