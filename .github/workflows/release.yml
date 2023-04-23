@@ -31,5 +31,5 @@ jobs:
       - name: Publish to GitHub
         uses: xresloader/upload-to-github-release@v1
         with:
-          file: "*!(dev).jar"
+          file: "./build/libs/*!(dev).jar"
           update_latest_release: true
