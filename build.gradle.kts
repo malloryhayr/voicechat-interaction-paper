@@ -81,7 +81,7 @@ modrinth {
 hangarPublish {
     publications.register("plugin") {
         version.set(project.version as String)
-        namespace("iGalaxy", "voice-chat-interaction-paper")
+        namespace("iGalaxy", "voicechat-interaction-paper")
         channel.set("Release")
         apiKey.set(System.getenv("HANGAR_TOKEN"))
         platforms {
