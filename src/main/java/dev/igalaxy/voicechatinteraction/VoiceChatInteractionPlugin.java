@@ -6,18 +6,17 @@ import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import de.maxhenkel.voicechat.api.events.VoicechatServerStartedEvent;
 import de.maxhenkel.voicechat.api.opus.OpusDecoder;
 import org.bukkit.Bukkit;
-import org.bukkit.GameEvent;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class VoiceChatInteractionPlugin implements VoicechatPlugin {
+    private static final boolean IS_FOLIA = checkFolia();
 
     public static VoicechatApi voicechatApi;
     private static ConcurrentHashMap<UUID, Long> cooldowns;
@@ -94,11 +93,17 @@ public class VoiceChatInteractionPlugin implements VoicechatPlugin {
             return;
         }
 
-        bukkitPlayer.getServer().getScheduler().runTask(VoiceChatInteraction.INSTANCE, () -> {
+        final Runnable callEvent = () -> {
             if (activate(player)) {
                 bukkitPlayer.getWorld().sendGameEvent(null, VoiceChatInteraction.VOICE_GAME_EVENT, bukkitPlayer.getLocation().toVector());
             }
-        });
+        };
+
+        if (IS_FOLIA) {
+            bukkitPlayer.getScheduler().execute(VoiceChatInteraction.INSTANCE, callEvent, null, 0);
+        } else {
+            bukkitPlayer.getServer().getScheduler().runTask(VoiceChatInteraction.INSTANCE, callEvent);
+        }
     }
 
     private boolean activate(ServerPlayer player) {
@@ -129,4 +134,12 @@ public class VoiceChatInteractionPlugin implements VoicechatPlugin {
         data.set(key, PersistentDataType.BYTE, (byte) (value ? 1 : 0));
     }
 
+    private static boolean checkFolia() {
+        try {
+            Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
 }

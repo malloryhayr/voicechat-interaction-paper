@@ -1,9 +1,8 @@
 import io.papermc.hangarpublishplugin.model.Platforms
 
 plugins {
-    `java`
-    id("io.papermc.paperweight.userdev") version "1.5.4"
-    id("xyz.jpenilla.run-paper") version "2.0.1"
+    java
+    id("xyz.jpenilla.run-paper") version "2.1.0"
     id("com.modrinth.minotaur") version "2.+"
     id("io.papermc.hangar-publish-plugin") version "0.0.5"
 }
@@ -24,19 +23,11 @@ repositories {
 }
 
 dependencies {
-    paperweight.paperDevBundle("1.19-R0.1-SNAPSHOT")
-    implementation("de.maxhenkel.voicechat:voicechat-api:2.4.0")
+    compileOnly("dev.folia:folia-api:1.19.4-R0.1-SNAPSHOT")
+    compileOnly("de.maxhenkel.voicechat:voicechat-api:2.4.+")
 }
 
 tasks {
-    reobfJar {
-        version = "v${project.version}+$minecraftVersion"
-    }
-
-    assemble {
-        dependsOn(reobfJar)
-    }
-
     compileJava {
         options.encoding = Charsets.UTF_8.name()
 
@@ -70,7 +61,7 @@ modrinth {
     versionName.set("v${project.version} (Paper $minecraftVersion)")
     versionNumber.set("${project.version}+$minecraftVersion")
     versionType.set("release")
-    uploadFile.set(tasks.reobfJar.get().outputJar)
+    uploadFile.set(tasks.jar)
     gameVersions.addAll(versions)
     loaders.addAll(listOf("paper", "purpur"))
     dependencies {
@@ -86,7 +77,7 @@ hangarPublish {
         apiKey.set(System.getenv("HANGAR_TOKEN"))
         platforms {
             register(Platforms.PAPER) {
-                jar.set(tasks.reobfJar.get().outputJar)
+                jar.set(tasks.jar.flatMap { it.archiveFile })
                 platformVersions.set(versions)
                 dependencies {
                     hangar("henkelmax", "SimpleVoiceChat") {

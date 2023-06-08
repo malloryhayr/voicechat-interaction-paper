@@ -2,6 +2,7 @@ name: voicechat_interaction
 version: $version
 main: dev.igalaxy.voicechatinteraction.VoiceChatInteraction
 api-version: $apiVersion
+folia-supported: true
 prefix: voicechat_interaction
 authors: [ "henkelmax", "iGalaxy" ]
 description: $description
