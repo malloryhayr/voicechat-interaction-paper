@@ -1,7 +1,7 @@
 name: voicechat_interaction
 version: $version
 main: dev.igalaxy.voicechatinteraction.VoiceChatInteraction
-api-version: $apiVersion
+api-version: "$apiVersion"
 prefix: voicechat_interaction
 authors: [ "henkelmax", "iGalaxy" ]
 description: $description
