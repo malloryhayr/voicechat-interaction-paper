@@ -1,13 +1,13 @@
 name: voicechat_interaction
 version: $version
 main: dev.igalaxy.voicechatinteraction.VoiceChatInteraction
-api-version: $apiVersion
+api-version: "$apiVersion"
 folia-supported: true
 prefix: voicechat_interaction
-authors: [ "henkelmax", "iGalaxy" ]
+authors: ["henkelmax", "iGalaxy"]
 description: $description
 website: https://github.com/iGalaxyYT/voicechat-interaction-paper
-depend: [ voicechat ]
+depend: [voicechat]
 commands:
   voicechat_interaction:
     description: "Manage Voice Chat Interaction settings"

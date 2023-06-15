@@ -8,9 +8,9 @@ plugins {
 }
 
 group = "dev.igalaxy.voicechatinteraction"
-version = "1.2.3"
+version = "1.3.0"
 description = "Detect voice chat with the sculk sensor"
-val minecraftVersion = "1.19.x"
+val minecraftVersion = "1.20.x"
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
@@ -23,8 +23,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly("dev.folia:folia-api:1.19.4-R0.1-SNAPSHOT")
-    compileOnly("de.maxhenkel.voicechat:voicechat-api:2.4.+")
+    paperweight.paperDevBundle("1.20-R0.1-SNAPSHOT")
+    implementation("de.maxhenkel.voicechat:voicechat-api:2.4.0")
 }
 
 tasks {
@@ -44,7 +44,7 @@ tasks {
             "name" to project.name,
             "version" to project.version,
             "description" to project.description,
-            "apiVersion" to "1.19"
+            "apiVersion" to "1.20"
         )
         inputs.properties(props)
         filesMatching("plugin.yml") {
@@ -53,7 +53,7 @@ tasks {
     }
 }
 
-val versions = listOf("1.19", "1.19.1", "1.19.2", "1.19.3", "1.19.4")
+val versions = listOf("1.20", "1.20.1")
 
 modrinth {
     token.set(System.getenv("MODRINTH_TOKEN"))
