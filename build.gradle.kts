@@ -2,16 +2,16 @@ import io.papermc.hangarpublishplugin.model.Platforms
 
 plugins {
     `java`
-    id("io.papermc.paperweight.userdev") version "1.5.5"
+    id("io.papermc.paperweight.userdev") version "1.5.11"
     id("xyz.jpenilla.run-paper") version "2.0.1"
     id("com.modrinth.minotaur") version "2.+"
     id("io.papermc.hangar-publish-plugin") version "0.0.5"
 }
 
 group = "dev.igalaxy.voicechatinteraction"
-version = "1.3.1"
+version = "1.3.2"
 description = "Detect voice chat with the sculk sensor"
-val minecraftVersion = "1.20.2"
+val minecraftVersion = "1.20.4"
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    paperweight.paperDevBundle("1.20.2-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("1.20.4-R0.1-SNAPSHOT")
     implementation("de.maxhenkel.voicechat:voicechat-api:2.4.0")
 }
 
@@ -62,7 +62,7 @@ tasks {
     }
 }
 
-val versions = listOf("1.20", "1.20.2")
+val versions = listOf("1.20", "1.20.4")
 
 modrinth {
     token.set(System.getenv("MODRINTH_TOKEN"))
